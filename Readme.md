@@ -19,12 +19,11 @@ As AI agents become more autonomous, they increasingly need to act on behalf of 
 ---
 
 ## Screenshots
-# <img src="screenshot/login.png"  align="center" style="margin-right: 10px;"> 
-# <img src="screenshot/login-web.png"  align="center" style="margin-right: 10px;"> 
-# <img src="screenshot/dashboard.png"  align="center" style="margin-right: 10px;"> 
-# <img src="screenshot/pending-permission.png" align="center" style="margin-right: 10px;"> 
-# <img src="screenshot/permissions.png" align="center" style="margin-right: 10px;"> 
- <img src="screenshot/request-success.png"  align="center" style="margin-right: 10px;"> 
+<div align="center"> <img src="screenshot/login.png" width="250" alt="Login Screen"/> <img src="screenshot/login-web.png" width="250" alt="Web Login"/> <img src="screenshot/dashboard.png" width="250" alt="Dashboard"/>
+
+<br/><br/>
+
+<img src="screenshot/pending-permission.png" width="250" alt="Pending Permissions"/> <img src="screenshot/permissions.png" width="250" alt="Permissions"/> <img src="screenshot/request-success.png" width="250" alt="Request Success"/> </div>
 
 
 ## 🔥 Key Features
