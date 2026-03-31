@@ -18,6 +18,15 @@ As AI agents become more autonomous, they increasingly need to act on behalf of 
 
 ---
 
+## Screenshots
+# <img src="screenshot/login.png"  align="center" style="margin-right: 10px;"> 
+# <img src="screenshot/login-web.png"  align="center" style="margin-right: 10px;"> 
+# <img src="screenshot/dashboard.png"  align="center" style="margin-right: 10px;"> 
+# <img src="screenshot/pending-permission.png" align="center" style="margin-right: 10px;"> 
+# <img src="screenshot/permissions.png" align="center" style="margin-right: 10px;"> 
+ <img src="screenshot/request-success.png"  align="center" style="margin-right: 10px;"> 
+
+
 ## 🔥 Key Features
 
 ### 🔐 1. Auth0-Powered Identity Layer

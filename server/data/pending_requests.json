@@ -1,0 +1,29 @@
+[
+  {
+    "id": "eb48146f-7391-4278-a550-c09589fb8cff",
+    "userId": "auth0|69ca6f1032c1da6e9aa9e0b0",
+    "action": "send_email",
+    "to": "team@mail.com",
+    "message": "Meeting at 5",
+    "status": "pending",
+    "createdAt": "2026-03-31T12:10:59.029Z"
+  },
+  {
+    "id": "4a81b319-c2e1-4f76-8ee6-5be57ac76b76",
+    "userId": "auth0|69ca6f1032c1da6e9aa9e0b0",
+    "action": "send_email",
+    "to": "team@mail.com",
+    "message": "Meeting at 5",
+    "status": "pending",
+    "createdAt": "2026-03-31T12:11:59.686Z"
+  },
+  {
+    "id": "02b29846-9299-40b5-add5-d36530dcd2b7",
+    "userId": "auth0|69ca6f1032c1da6e9aa9e0b0",
+    "action": "send_email",
+    "to": "team@mail.com",
+    "message": "Meeting at 5",
+    "status": "pending",
+    "createdAt": "2026-03-31T12:12:13.076Z"
+  }
+]
