@@ -1,0 +1,34 @@
+import { Injectable } from '@nestjs/common';
+import { StorageService } from '../../core/storage/storage.service';
+
+export interface LogEntry {
+  action: string;
+  status: string;
+  timestamp: number;
+}
+
+@Injectable()
+export class LogsService {
+  private logs: LogEntry[] = [];
+  private readonly STORAGE_KEY = 'logs';
+
+  constructor(private readonly storageService: StorageService) {
+    this.logs = this.storageService.load<LogEntry[]>(this.STORAGE_KEY) || [];
+  }
+
+  addLog(action: string, status: string) {
+    const newLog: LogEntry = {
+      action,
+      status,
+      timestamp: Date.now(),
+    };
+    this.logs.push(newLog);
+    this.storageService.save(this.STORAGE_KEY, this.logs);
+    console.log(`[Log] ${action} - ${status}`);
+    return newLog;
+  }
+
+  getLogs() {
+    return this.logs;
+  }
+}
