@@ -13,20 +13,24 @@ import { Auth0Provider } from "react-native-auth0";
 import { CustomSplashScreen } from "@/src/components/ui/custom-splash-screen";
 
 import { ToastProvider } from "@/src/components/ui/toast-provider";
+import * as SplashScreen from "expo-splash-screen";
 
 export default function RootLayout() {
   const { initialized } = useAuthStore();
   const [animationComplete, setAnimationComplete] = useState(false);
 
   useEffect(() => {
+    SplashScreen.setOptions({
+      fade: true,
+    });
+    SplashScreen.hideAsync();
+
     const subscription = Linking.addEventListener("url", (event) => {
       console.log("Deep link received:", event.url);
     });
 
     return () => subscription.remove();
   }, []);
-
-  console.log("token", useAuthStore.getState().token);
 
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.background }}>

@@ -33,10 +33,12 @@
         "expo-splash-screen",
         {
           "image": "./assets/images/icon.png",
-          "width":"100%",
-          "height":"100%",
-          "resizeMode": "cover"
+          "resizeMode": "cover",
+          "backgroundColor": "#000",
+           "imageWidth": "100%",
+           "imageHeight": "100%"
         }
+   
       ],
       [
         "react-native-auth0",

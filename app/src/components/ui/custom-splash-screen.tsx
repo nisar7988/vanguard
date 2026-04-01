@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -9,6 +9,7 @@ import Animated, {
   withDelay,
 } from 'react-native-reanimated';
 import { COLORS } from '@/src/constants/theme';
+import Constants from 'expo-constants';
 
 export function CustomSplashScreen({
   isAppReady,
@@ -19,6 +20,7 @@ export function CustomSplashScreen({
 }) {
   const opacity = useSharedValue(1);
   const scale = useSharedValue(1);
+  const version = Constants.expoConfig?.version || '1.0.0';
 
   useEffect(() => {
     if (isAppReady) {
@@ -57,11 +59,16 @@ export function CustomSplashScreen({
 
   return (
     <Animated.View style={[StyleSheet.absoluteFillObject, styles.container, containerStyle]} pointerEvents="none">
-      <Animated.Image
-        source={require('../../../assets/images/icon.png')}
-        style={[styles.image, imageStyle]}
-        resizeMode="contain"
-      />
+      <View style={styles.content}>
+        <Animated.Image
+          source={require('../../../assets/images/icon.png')}
+          style={[styles.image, imageStyle]}
+          resizeMode="contain"
+        />
+      </View>
+      <View style={styles.footer}>
+        <Text style={styles.versionText}>v{version}</Text>
+      </View>
     </Animated.View>
   );
 }
@@ -69,12 +76,29 @@ export function CustomSplashScreen({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.background, 
+    zIndex: 9999,
+  },
+  content: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 9999,
   },
   image: {
     width: '100%',
     height: '100%',
+  },
+  footer: {
+    position: 'absolute',
+    bottom: 50,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+  },
+  versionText: {
+    color: COLORS.textSecondary,
+    fontSize: 14,
+    fontWeight: '500',
+    letterSpacing: 1,
+    opacity: 0.8,
   },
 });
