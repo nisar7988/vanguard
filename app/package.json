@@ -1,5 +1,5 @@
 {
-  "name": "vanguard-app",
+  "name": "vanguard",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
