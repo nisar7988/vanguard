@@ -1,6 +1,6 @@
 import { agentApi, Log } from "@/src/api/agent-api";
 import { useFocusEffect } from "expo-router";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 
 export function useLogs() {
   const [logs, setLogs] = useState<Log[]>([]);
@@ -24,6 +24,14 @@ export function useLogs() {
       fetchLogs();
     }, [fetchLogs]),
   );
+
+  // Poll for updates every 5 seconds for "real-time" feel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchLogs();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [fetchLogs]);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);

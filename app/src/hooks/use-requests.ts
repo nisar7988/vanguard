@@ -6,19 +6,32 @@ export function useRequests() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
-  const fetchRequests = useCallback(async () => {
+  const fetchRequests = useCallback(async (isAuto = false) => {
     try {
+      if (!isAuto) setLoading(true);
       const response = await agentApi.getRequests();
       // Only show pending requests in the requests screen
       setRequests(response.data.filter((r: AgentRequest) => r.status === 'pending'));
     } catch (error: any) {
-
       console.error('Failed to fetch requests:', error.message || error);
     } finally {
-      setLoading(false);
+      if (!isAuto) setLoading(false);
       setRefreshing(false);
     }
   }, []);
+
+  // Poll for updates every 3 seconds for "real-time" feel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchRequests(true);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [fetchRequests]);
+
+  // Initial fetch
+  useEffect(() => {
+    fetchRequests();
+  }, [fetchRequests]);
 
   const handleAction = useCallback(async (requestId: string, mode: 'once' | 'always' | 'deny') => {
     try {
@@ -36,12 +49,7 @@ export function useRequests() {
       console.error('Failed to process request:', error.message || error);
       throw error;
     }
-
   }, []);
-
-  useEffect(() => {
-    fetchRequests();
-  }, [fetchRequests]);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);

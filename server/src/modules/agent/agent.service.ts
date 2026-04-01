@@ -9,6 +9,20 @@ import { ActionsService } from '../actions/actions.service';
 import { RiskLevel, getRiskLevel } from './config/risk-config';
 import { StorageService } from '../../core/storage/storage.service';
 
+const AGENT_SOURCE = 'AI Agent (OpenClaw)';
+
+function buildReason(riskLevel: RiskLevel): string {
+  switch (riskLevel) {
+    case RiskLevel.HIGH:
+      return 'High-value transaction requires user approval';
+    case RiskLevel.MEDIUM:
+      return 'Sensitive action requires one-time user authorization';
+    case RiskLevel.LOW:
+    default:
+      return 'Low-risk action auto-executed by policy';
+  }
+}
+
 @Injectable()
 export class AgentService {
   private pendingRequests: AgentRequest[] = [];
@@ -29,6 +43,7 @@ export class AgentService {
 
   async handleRequest(dto: CreateAgentRequestDto, userId: string) {
     const riskLevel = getRiskLevel(dto.action);
+    const reason = buildReason(riskLevel);
 
     // 1. Check if it's LOW risk (Auto-execute)
     if (riskLevel === RiskLevel.LOW) {
@@ -36,7 +51,7 @@ export class AgentService {
         ...dto,
         userId,
       });
-      this.logsService.addLog(dto.action, 'success (auto)');
+      this.logsService.addLog(dto.action, 'success (auto)', riskLevel, reason, AGENT_SOURCE);
       return {
         status: 'executed',
         message: `Action ${dto.action} auto-executed (Low Risk).`,
@@ -48,7 +63,7 @@ export class AgentService {
     const permission = this.permissionsService.checkPermission(
       userId,
       dto.action,
-      dto.to,
+      dto.target,
     );
 
     if (permission) {
@@ -57,23 +72,25 @@ export class AgentService {
           ...dto,
           userId,
         });
-        this.logsService.addLog(dto.action, 'success');
+        this.logsService.addLog(dto.action, 'success', riskLevel, reason, AGENT_SOURCE);
         return {
           status: 'executed',
           message: `Action ${dto.action} executed due to existing permission.`,
           execution: executionResult,
         };
       }
-      
+
       // High risk might still need step-up even with permission
       if (riskLevel === RiskLevel.HIGH) {
-         // Placeholder for step-up: store as pending for now
-         const newRequest: AgentRequest = {
+        const newRequest: AgentRequest = {
           id: uuidv4(),
           userId,
           ...dto,
           status: 'pending',
+          riskLevel,
           requiresStepUp: true,
+          reason,
+          source: AGENT_SOURCE,
           createdAt: new Date(),
         };
         this.pendingRequests.push(newRequest);
@@ -92,6 +109,9 @@ export class AgentService {
       userId,
       ...dto,
       status: 'pending',
+      riskLevel,
+      reason,
+      source: AGENT_SOURCE,
       createdAt: new Date(),
     };
 
@@ -121,7 +141,7 @@ export class AgentService {
       this.permissionsService.savePermission({
         userId: request.userId,
         action: request.action,
-        scope: request.to,
+        target: request.target,
         type: 'allow_always',
       });
     }
@@ -133,13 +153,10 @@ export class AgentService {
     let executionResult: any = null;
 
     if (dto.decision !== 'deny') {
-      // executeAction()
       executionResult = await this.actionsService.executeAction(request);
-      
-      // saveLog()
-      this.logsService.addLog(request.action, 'success');
+      this.logsService.addLog(request.action, 'success', request.riskLevel, request.reason, request.source);
     } else {
-      this.logsService.addLog(request.action, 'denied');
+      this.logsService.addLog(request.action, 'denied', request.riskLevel, request.reason, request.source);
     }
 
     return {

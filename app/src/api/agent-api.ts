@@ -4,16 +4,19 @@ import apiClient from "./api-client";
 export interface AgentRequest {
   id: string;
   action: string;
-  to: string;
-  message: string;
+  target: string;
+  content: string;
   status: "pending" | "approved" | "denied";
+  riskLevel: "low" | "medium" | "high";
+  reason?: string;
+  source?: string;
   createdAt: string;
 }
 
 export interface Permission {
   id: string;
   action: string;
-  to: string;
+  target: string;
   status: "always_allow" | "ask_once" | "deny";
 }
 
@@ -21,6 +24,9 @@ export interface Log {
   id: string;
   action: string;
   status: "success" | "denied" | "pending";
+  riskLevel?: string;
+  reason?: string;
+  source?: string;
   timestamp: string;
 }
 
@@ -50,10 +56,10 @@ export const agentApi = {
 
   simulateRequest: async (data: {
     action: string;
-    to: string;
-    message: string;
+    target: string;
+    content: string;
   }) => {
-    const response = await apiClient.post<API_Response<any>>("/v1/agent/request", data);
+    const response = await apiClient.post<API_Response<any>>("/v1/agent/request-action", data);
     return response.data;
   },
 };

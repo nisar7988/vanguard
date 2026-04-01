@@ -37,7 +37,7 @@ describe('PermissionsService', () => {
     const newRule = {
       userId: 'user_456',
       action: 'delete_account',
-      scope: '*',
+      target: '*',
       type: 'allow_always' as const,
     };
     service.savePermission(newRule);

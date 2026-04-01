@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 import { Auth0Provider } from "react-native-auth0";
 import { CustomSplashScreen } from "@/src/components/ui/custom-splash-screen";
 
+import { ToastProvider } from "@/src/components/ui/toast-provider";
+
 export default function RootLayout() {
   const { initialized } = useAuthStore();
   const [animationComplete, setAnimationComplete] = useState(false);
@@ -30,15 +32,17 @@ export default function RootLayout() {
     <View style={{ flex: 1, backgroundColor: COLORS.background }}>
       {initialized && (
         <Auth0Provider domain={AUTH0_DOMAIN} clientId={AUTH0_CLIENT_ID}>
-          <Stack screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="(auth)/index" />
-            <Stack.Screen name="(main)" />
-            <Stack.Screen
-              name="approval/[id]"
-              options={{ presentation: "modal", title: "Approval" }}
-            />
-          </Stack>
-          <CustomAlert />
+          <ToastProvider>
+            <Stack screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="(auth)/index" />
+              <Stack.Screen name="(main)" />
+              <Stack.Screen
+                name="approval/[id]"
+                options={{ presentation: "modal", title: "Approval" }}
+              />
+            </Stack>
+            <CustomAlert />
+          </ToastProvider>
         </Auth0Provider>
       )}
 

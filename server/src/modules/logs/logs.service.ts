@@ -4,6 +4,9 @@ import { StorageService } from '../../core/storage/storage.service';
 export interface LogEntry {
   action: string;
   status: string;
+  riskLevel?: string;
+  reason?: string;
+  source?: string;
   timestamp: number;
 }
 
@@ -16,15 +19,18 @@ export class LogsService {
     this.logs = this.storageService.load<LogEntry[]>(this.STORAGE_KEY) || [];
   }
 
-  addLog(action: string, status: string) {
+  addLog(action: string, status: string, riskLevel?: string, reason?: string, source?: string) {
     const newLog: LogEntry = {
       action,
       status,
+      riskLevel,
+      reason,
+      source,
       timestamp: Date.now(),
     };
     this.logs.push(newLog);
     this.storageService.save(this.STORAGE_KEY, this.logs);
-    console.log(`[Log] ${action} - ${status}`);
+    console.log(`[Log] ${action} - ${status}${reason ? ` | Reason: ${reason}` : ''}`);
     return newLog;
   }
 

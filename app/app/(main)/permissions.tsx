@@ -39,7 +39,7 @@ export default function PermissionsScreen() {
             </View>
             <View className="flex-1">
               <Text className="text-vanguard-text-primary font-bold text-lg">Send Email</Text>
-              <Text className="text-vanguard-text-secondary text-xs">To: {permission.to}</Text>
+              <Text className="text-vanguard-text-secondary text-xs">Target: {permission.target}</Text>
             </View>
             <View className="bg-vanguard-success/10 px-3 py-1 rounded-full border border-vanguard-success/30">
               <Text className="text-vanguard-success text-[10px] font-bold uppercase">Always Allow</Text>

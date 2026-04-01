@@ -53,30 +53,30 @@ describe('AgentService', () => {
 
   describe('handleRequest', () => {
     it('should auto-execute if LOW risk', async () => {
-      const dto = { action: 'read_status', to: 't', message: 'm' };
+      const dto = { action: 'read_status', target: 't', content: 'm' };
       const result = await service.handleRequest(dto, 'u1');
 
       expect(result.status).toBe('executed');
       expect(result.message).toContain('auto-executed');
       expect(actionsService.executeAction).toHaveBeenCalled();
-      expect(logsService.addLog).toHaveBeenCalledWith('read_status', 'success (auto)');
+      expect(logsService.addLog).toHaveBeenCalledWith('read_status', 'success (auto)', 'low');
     });
 
     it('should execute if MEDIUM risk and permission exists', async () => {
       (permissionsService.checkPermission as jest.Mock).mockReturnValue({ type: 'allow_always' });
       
-      const dto = { action: 'send_email', to: 't', message: 'm' };
+      const dto = { action: 'send_email', target: 't', content: 'm' };
       const result = await service.handleRequest(dto, 'u1');
 
       expect(result.status).toBe('executed');
       expect(actionsService.executeAction).toHaveBeenCalled();
-      expect(logsService.addLog).toHaveBeenCalledWith('send_email', 'success');
+      expect(logsService.addLog).toHaveBeenCalledWith('send_email', 'success', 'medium');
     });
 
     it('should store as pending if MEDIUM risk and NO permission exists', async () => {
       (permissionsService.checkPermission as jest.Mock).mockReturnValue(undefined);
       
-      const dto = { action: 'send_email', to: 't', message: 'm' };
+      const dto = { action: 'send_email', target: 't', content: 'm' };
       const result = await service.handleRequest(dto, 'u1');
 
       expect(result.status).toBe('pending_approval');
@@ -86,7 +86,7 @@ describe('AgentService', () => {
     it('should require step-up if HIGH risk even with permission', async () => {
       (permissionsService.checkPermission as jest.Mock).mockReturnValue({ type: 'allow_always' });
       
-      const dto = { action: 'delete_account', to: 't', message: 'm' };
+      const dto = { action: 'delete_account', target: 't', content: 'm' };
       const result = await service.handleRequest(dto, 'u1');
 
       expect(result.status).toBe('pending_step_up');
@@ -97,7 +97,7 @@ describe('AgentService', () => {
   describe('approveRequest', () => {
     it('should save permission and execute if always_allow', async () => {
       // Setup: add a pending request
-      const dto = { action: 'send', to: 't', message: 'm' };
+      const dto = { action: 'send', target: 't', content: 'm' };
       const req = await service.handleRequest(dto, 'u1');
       const requestId = (req as any).requestId;
 

@@ -1,0 +1,46 @@
+[
+  {
+    "action": "send_email",
+    "status": "denied",
+    "riskLevel": "medium",
+    "timestamp": 1775040989395
+  },
+  {
+    "action": "read_status",
+    "status": "success (auto)",
+    "riskLevel": "low",
+    "timestamp": 1775041223533
+  },
+  {
+    "action": "execute_payment",
+    "status": "success",
+    "riskLevel": "high",
+    "timestamp": 1775041351024
+  },
+  {
+    "action": "send_email",
+    "status": "denied",
+    "riskLevel": "medium",
+    "timestamp": 1775041352352
+  },
+  {
+    "action": "send_email",
+    "status": "success",
+    "riskLevel": "medium",
+    "timestamp": 1775041353420
+  },
+  {
+    "action": "execute_payment",
+    "status": "success",
+    "riskLevel": "high",
+    "timestamp": 1775041371509
+  },
+  {
+    "action": "read_status",
+    "status": "success (auto)",
+    "riskLevel": "low",
+    "reason": "Low-risk action auto-executed by policy",
+    "source": "AI Agent (OpenClaw)",
+    "timestamp": 1775043767494
+  }
+]

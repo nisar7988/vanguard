@@ -15,7 +15,7 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagg
 export class AgentController {
   constructor(private readonly agentService: AgentService) {}
 
-  @Post('request')
+  @Post('request-action')
   @ApiOperation({ summary: 'Submit an AI agent action request' })
   @ApiResponse({ status: 201, description: 'Request stored or executed.' })
   async handleRequest(

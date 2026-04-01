@@ -1,29 +1,51 @@
 [
   {
-    "id": "eb48146f-7391-4278-a550-c09589fb8cff",
+    "id": "c9b8bdaf-2d3b-4bee-9409-87f591c8fd4e",
     "userId": "auth0|69ca6f1032c1da6e9aa9e0b0",
-    "action": "send_email",
-    "to": "team@mail.com",
-    "message": "Meeting at 5",
+    "action": "execute_payment",
+    "target": "vendor_acct_99",
+    "content": "$500.00",
     "status": "pending",
-    "createdAt": "2026-03-31T12:10:59.029Z"
+    "riskLevel": "high",
+    "requiresStepUp": true,
+    "createdAt": "2026-04-01T11:02:57.705Z"
   },
   {
-    "id": "4a81b319-c2e1-4f76-8ee6-5be57ac76b76",
+    "id": "9f804fc2-fd75-45ee-874c-aa5c19919033",
     "userId": "auth0|69ca6f1032c1da6e9aa9e0b0",
-    "action": "send_email",
-    "to": "team@mail.com",
-    "message": "Meeting at 5",
+    "action": "execute_payment",
+    "target": "vendor_acct_99",
+    "content": "$500.00",
     "status": "pending",
-    "createdAt": "2026-03-31T12:11:59.686Z"
+    "riskLevel": "high",
+    "requiresStepUp": true,
+    "reason": "High-value transaction requires user approval",
+    "source": "AI Agent (OpenClaw)",
+    "createdAt": "2026-04-01T11:42:58.536Z"
   },
   {
-    "id": "02b29846-9299-40b5-add5-d36530dcd2b7",
+    "id": "a4bc35a2-abdb-4336-b784-90b1d89d67a9",
     "userId": "auth0|69ca6f1032c1da6e9aa9e0b0",
     "action": "send_email",
-    "to": "team@mail.com",
-    "message": "Meeting at 5",
+    "target": "client@example.com",
+    "content": "Invoice details",
     "status": "pending",
-    "createdAt": "2026-03-31T12:12:13.076Z"
+    "riskLevel": "medium",
+    "reason": "Sensitive action requires one-time user authorization",
+    "source": "AI Agent (OpenClaw)",
+    "createdAt": "2026-04-01T11:43:40.192Z"
+  },
+  {
+    "id": "f35e19ad-2784-482f-971a-78eb1efb866d",
+    "userId": "auth0|69ca6f1032c1da6e9aa9e0b0",
+    "action": "execute_payment",
+    "target": "vendor_acct_99",
+    "content": "$500.00",
+    "status": "pending",
+    "riskLevel": "high",
+    "requiresStepUp": true,
+    "reason": "High-value transaction requires user approval",
+    "source": "AI Agent (OpenClaw)",
+    "createdAt": "2026-04-01T11:47:46.998Z"
   }
 ]

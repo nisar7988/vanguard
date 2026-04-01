@@ -24,7 +24,7 @@ describe('ActionsService', () => {
   });
 
   it('should execute an action and return success with a token', async () => {
-    const request = { userId: 'u1', action: 'test', to: 'recipient' };
+    const request = { userId: 'u1', action: 'test', target: 'recipient' };
     const result = await service.executeAction(request);
 
     expect(result.status).toBe('success');

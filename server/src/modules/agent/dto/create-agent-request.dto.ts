@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateAgentRequestDto {
@@ -7,12 +7,13 @@ export class CreateAgentRequestDto {
   @IsNotEmpty()
   action: string;
 
-  @ApiProperty({ example: 'test@mail.com', description: 'The recipient' })
-  @IsEmail()
-  to: string;
+  @ApiProperty({ example: 'test@mail.com', description: 'The recipient/target' })
+  @IsString()
+  @IsNotEmpty()
+  target: string;
 
   @ApiProperty({ example: 'Hello', description: 'The message content' })
   @IsString()
   @IsNotEmpty()
-  message: string;
+  content: string;
 }

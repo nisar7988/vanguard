@@ -4,7 +4,7 @@ import { StorageService } from '../../core/storage/storage.service';
 export interface Permission {
   userId: string;
   action: string;
-  scope: string;
+  target: string;
   type: 'allow_always' | 'allow_once' | 'deny';
 }
 
@@ -19,18 +19,18 @@ export class PermissionsService {
       {
         userId: 'user_123',
         action: 'send_email',
-        scope: 'team@mail.com',
+        target: 'team@mail.com',
         type: 'allow_always',
       },
     ];
   }
 
-  checkPermission(userId: string, action: string, scope: string): Permission | undefined {
+  checkPermission(userId: string, action: string, target: string): Permission | undefined {
     return this.permissions.find(
       (p) => 
         p.userId === userId && 
         p.action === action && 
-        (p.scope === '*' || p.scope === scope) &&
+        (p.target === '*' || p.target === target) &&
         p.type === 'allow_always'
     );
   }
