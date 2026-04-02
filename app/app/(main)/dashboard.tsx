@@ -2,6 +2,7 @@ import { ThemedGradient } from "@/src/components/themed-gradient";
 import { COLORS } from "@/src/constants/theme";
 import { useAuth0Login } from "@/src/hooks/use-auth0-login";
 import { useDashboardActions } from "@/src/hooks/use-dashboard-actions";
+import { useRequests } from "@/src/hooks/use-requests";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
@@ -12,6 +13,8 @@ export default function DashboardScreen() {
   const router = useRouter();
   const { isConnected, handleConnectGmail, handleSimulateRequest } =
     useDashboardActions();
+  const { requests } = useRequests();
+  const pendingCount = requests.length;
 
   return (
     <SafeAreaView className="flex-1 bg-vanguard-background">
@@ -53,6 +56,8 @@ export default function DashboardScreen() {
           <View className="flex-row justify-between mb-4">
             <TouchableOpacity
               onPress={() => handleSimulateRequest("read_status")}
+              disabled={!isConnected}
+              style={{ opacity: isConnected ? 1 : 0.5 }}
               className="flex-1 bg-vanguard-background p-4 rounded-2xl mr-2 items-center border border-vanguard-border/50"
             >
               <View className="w-10 h-10 bg-emerald-500/10 rounded-full items-center justify-center mb-2">
@@ -68,6 +73,8 @@ export default function DashboardScreen() {
 
             <TouchableOpacity
               onPress={() => handleSimulateRequest("send_email")}
+              disabled={!isConnected}
+              style={{ opacity: isConnected ? 1 : 0.5 }}
               className="flex-1 bg-vanguard-background p-4 rounded-2xl mx-1 items-center border border-vanguard-border/50"
             >
               <View className="w-10 h-10 bg-amber-500/10 rounded-full items-center justify-center mb-2">
@@ -83,6 +90,8 @@ export default function DashboardScreen() {
 
             <TouchableOpacity
               onPress={() => handleSimulateRequest("execute_payment")}
+              disabled={!isConnected}
+              style={{ opacity: isConnected ? 1 : 0.5 }}
               className="flex-1 bg-vanguard-background p-4 rounded-2xl ml-2 items-center border border-vanguard-border/50"
             >
               <View className="w-10 h-10 bg-rose-500/10 rounded-full items-center justify-center mb-2">
@@ -114,9 +123,14 @@ export default function DashboardScreen() {
         </View>
 
         {/* Management Sections */}
-        <Text className="text-vanguard-text-secondary font-bold uppercase tracking-widest text-xs mt-4 mb-4">
-          Management
-        </Text>
+        <View className="flex-row justify-between items-center mt-4 mb-4">
+          <Text className="text-vanguard-text-secondary font-bold uppercase tracking-widest text-xs">
+            Management
+          </Text>
+          <Text className="text-vanguard-primary/80 text-[10px] font-medium italic">
+            User is notified when action requires approval
+          </Text>
+        </View>
 
         <TouchableOpacity
           onPress={() => router.push("/(main)/requests")}
@@ -130,9 +144,18 @@ export default function DashboardScreen() {
             <Ionicons name="notifications" size={20} color={COLORS.white} />
           </ThemedGradient>
           <View className="flex-1">
-            <Text className="text-vanguard-text-primary font-bold text-lg">
-              Pending Requests
-            </Text>
+            <View className="flex-row items-center">
+              <Text className="text-vanguard-text-primary font-bold text-lg">
+                Pending Requests
+              </Text>
+              {pendingCount > 0 && (
+                <View className="bg-vanguard-primary px-2 py-0.5 rounded-full ml-2">
+                  <Text className="text-white text-[10px] font-bold">
+                    {pendingCount}
+                  </Text>
+                </View>
+              )}
+            </View>
             <Text className="text-vanguard-text-secondary text-xs">
               Review and approve actions
             </Text>

@@ -34,6 +34,19 @@ export function useDashboardActions() {
   }, [isConnected, setConnected, showAlert, showToast]);
 
   const handleSimulateRequest = useCallback(async (actionType: string = 'send_email') => {
+    if (!isConnected) {
+      showToast({ 
+        message: 'Please authorize Gmail Account to begin simulations', 
+        type: 'warning' 
+      });
+      return;
+    }
+
+    showToast({ 
+      message: 'New request received', 
+      type: 'info' 
+    });
+    
     try {
       const payloads: Record<string, any> = {
         read_status: { action: 'read_status', target: 'system_logs', content: 'Fetch status' },
