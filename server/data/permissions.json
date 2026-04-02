@@ -1,20 +1,3 @@
 [
-  {
-    "userId": "user_123",
-    "action": "send_email",
-    "target": "team@mail.com",
-    "type": "allow_always"
-  },
-  {
-    "userId": "auth0|69ca6f1032c1da6e9aa9e0b0",
-    "action": "execute_payment",
-    "target": "vendor_acct_99",
-    "type": "allow_always"
-  },
-  {
-    "userId": "auth0|69ca6f1032c1da6e9aa9e0b0",
-    "action": "execute_payment",
-    "target": "vendor_acct_99",
-    "type": "allow_always"
-  }
+  
 ]
