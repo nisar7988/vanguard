@@ -14,7 +14,7 @@ export class ActionsService {
 
     // Step 2: simulate API call
     console.log(`[Action] Executing ${request.action} for ${request.target}`);
-    
+
     return {
       status: 'success',
       message: `${request.action} completed successfully`,
@@ -22,7 +22,7 @@ export class ActionsService {
         target: request.target,
         timestamp: new Date().toISOString(),
       },
-      token, // Include token in response for demonstration
+      token,
     };
   }
 }

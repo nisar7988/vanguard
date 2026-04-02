@@ -7,7 +7,10 @@ export class CreateAgentRequestDto {
   @IsNotEmpty()
   action: string;
 
-  @ApiProperty({ example: 'test@mail.com', description: 'The recipient/target' })
+  @ApiProperty({
+    example: 'test@mail.com',
+    description: 'The recipient/target',
+  })
   @IsString()
   @IsNotEmpty()
   target: string;

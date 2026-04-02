@@ -4,7 +4,12 @@ import { CreateAgentRequestDto } from './dto/create-agent-request.dto';
 import { ApproveRequestDto } from './dto/approve-request.dto';
 import { AgentRequest } from './interfaces/agent.interface';
 import { User } from '../../common/decorators/user.decorator';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 @ApiTags('agent')
 @ApiBearerAuth()

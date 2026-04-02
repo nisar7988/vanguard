@@ -14,10 +14,9 @@ export interface API_Response_Paginated<T> {
   totalCount: number;
 }
 
-// 🔥 Matches your NestJS exception filter EXACTLY
 export interface API_Response_Error {
   statusCode: number;
   timestamp: string;
   path: string;
-  error: string; // message from backend
+  error: string;
 }

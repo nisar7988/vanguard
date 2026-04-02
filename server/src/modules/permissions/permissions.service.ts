@@ -25,20 +25,26 @@ export class PermissionsService {
     ];
   }
 
-  checkPermission(userId: string, action: string, target: string): Permission | undefined {
+  checkPermission(
+    userId: string,
+    action: string,
+    target: string,
+  ): Permission | undefined {
     return this.permissions.find(
-      (p) => 
-        p.userId === userId && 
-        p.action === action && 
+      (p) =>
+        p.userId === userId &&
+        p.action === action &&
         (p.target === '*' || p.target === target) &&
-        p.type === 'allow_always'
+        p.type === 'allow_always',
     );
   }
 
   savePermission(permission: Permission) {
     this.permissions.push(permission);
     this.storageService.save(this.STORAGE_KEY, this.permissions);
-    console.log(`[Permission] Saved ${permission.type} for ${permission.userId} - ${permission.action}`);
+    console.log(
+      `[Permission] Saved ${permission.type} for ${permission.userId} - ${permission.action}`,
+    );
   }
 
   getAllPermissions(): Permission[] {

@@ -29,6 +29,9 @@ describe('ActionsService', () => {
 
     expect(result.status).toBe('success');
     expect(result.token).toBe('mock_token_123');
-    expect(tokenVaultService.getExternalToken).toHaveBeenCalledWith('u1', 'gmail');
+    expect(tokenVaultService.getExternalToken).toHaveBeenCalledWith(
+      'u1',
+      'gmail',
+    );
   });
 });

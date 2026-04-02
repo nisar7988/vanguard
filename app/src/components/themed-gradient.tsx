@@ -16,15 +16,11 @@ export const ThemedGradient = ({
   children,
   ...props
 }: ThemedGradientProps) => {
-  const gradientColors = colors || (disabled ? GRADIENTS.disabled : GRADIENTS[type]);
+  const gradientColors =
+    colors || (disabled ? GRADIENTS.disabled : GRADIENTS[type]);
 
   return (
-    <LinearGradient
-      colors={gradientColors}
-      start={start}
-      end={end}
-      {...props}
-    >
+    <LinearGradient colors={gradientColors} start={start} end={end} {...props}>
       {children}
     </LinearGradient>
   );

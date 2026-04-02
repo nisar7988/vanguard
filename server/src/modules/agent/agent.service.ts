@@ -34,7 +34,8 @@ export class AgentService {
     private readonly actionsService: ActionsService,
     private readonly storageService: StorageService,
   ) {
-    this.pendingRequests = this.storageService.load<AgentRequest[]>(this.STORAGE_KEY) || [];
+    this.pendingRequests =
+      this.storageService.load<AgentRequest[]>(this.STORAGE_KEY) || [];
   }
 
   private saveToStorage() {
@@ -51,7 +52,13 @@ export class AgentService {
         ...dto,
         userId,
       });
-      this.logsService.addLog(dto.action, 'success (auto)', riskLevel, reason, AGENT_SOURCE);
+      this.logsService.addLog(
+        dto.action,
+        'success (auto)',
+        riskLevel,
+        reason,
+        AGENT_SOURCE,
+      );
       return {
         status: 'executed',
         message: `Action ${dto.action} auto-executed (Low Risk).`,
@@ -72,7 +79,13 @@ export class AgentService {
           ...dto,
           userId,
         });
-        this.logsService.addLog(dto.action, 'success', riskLevel, reason, AGENT_SOURCE);
+        this.logsService.addLog(
+          dto.action,
+          'success',
+          riskLevel,
+          reason,
+          AGENT_SOURCE,
+        );
         return {
           status: 'executed',
           message: `Action ${dto.action} executed due to existing permission.`,
@@ -154,9 +167,21 @@ export class AgentService {
 
     if (dto.decision !== 'deny') {
       executionResult = await this.actionsService.executeAction(request);
-      this.logsService.addLog(request.action, 'success', request.riskLevel, request.reason, request.source);
+      this.logsService.addLog(
+        request.action,
+        'success',
+        request.riskLevel,
+        request.reason,
+        request.source,
+      );
     } else {
-      this.logsService.addLog(request.action, 'denied', request.riskLevel, request.reason, request.source);
+      this.logsService.addLog(
+        request.action,
+        'denied',
+        request.riskLevel,
+        request.reason,
+        request.source,
+      );
     }
 
     return {

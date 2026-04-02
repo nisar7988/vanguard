@@ -19,7 +19,13 @@ export class LogsService {
     this.logs = this.storageService.load<LogEntry[]>(this.STORAGE_KEY) || [];
   }
 
-  addLog(action: string, status: string, riskLevel?: string, reason?: string, source?: string) {
+  addLog(
+    action: string,
+    status: string,
+    riskLevel?: string,
+    reason?: string,
+    source?: string,
+  ) {
     const newLog: LogEntry = {
       action,
       status,
@@ -30,7 +36,9 @@ export class LogsService {
     };
     this.logs.push(newLog);
     this.storageService.save(this.STORAGE_KEY, this.logs);
-    console.log(`[Log] ${action} - ${status}${reason ? ` | Reason: ${reason}` : ''}`);
+    console.log(
+      `[Log] ${action} - ${status}${reason ? ` | Reason: ${reason}` : ''}`,
+    );
     return newLog;
   }
 

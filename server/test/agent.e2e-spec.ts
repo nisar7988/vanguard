@@ -1,5 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication, ValidationPipe, VersioningType } from '@nestjs/common';
+import {
+  INestApplication,
+  ValidationPipe,
+  VersioningType,
+} from '@nestjs/common';
 import request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { APP_GUARD } from '@nestjs/core';
@@ -24,7 +28,7 @@ describe('Agent Flow (e2e)', () => {
       .compile();
 
     app = moduleFixture.createNestApplication();
-    
+
     // Apply same global configurations as main.ts
     app.setGlobalPrefix('api');
     app.enableVersioning({
@@ -32,7 +36,7 @@ describe('Agent Flow (e2e)', () => {
     });
     app.useGlobalPipes(new ValidationPipe());
     app.useGlobalInterceptors(new TransformInterceptor());
-    
+
     await app.init();
   });
 
@@ -85,6 +89,10 @@ describe('Agent Flow (e2e)', () => {
 
     const logs = res5.body.data;
     expect(logs.length).toBeGreaterThanOrEqual(2);
-    expect(logs.some((l: any) => l.action === 'send_email' && l.status === 'success')).toBe(true);
+    expect(
+      logs.some(
+        (l: any) => l.action === 'send_email' && l.status === 'success',
+      ),
+    ).toBe(true);
   });
 });

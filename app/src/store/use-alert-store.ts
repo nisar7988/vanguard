@@ -1,9 +1,9 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
 interface AlertButton {
   text: string;
   onPress?: () => void;
-  style?: 'default' | 'cancel' | 'destructive';
+  style?: "default" | "cancel" | "destructive";
 }
 
 interface AlertState {
@@ -17,10 +17,10 @@ interface AlertState {
 
 export const useAlertStore = create<AlertState>((set) => ({
   visible: false,
-  title: '',
-  message: '',
+  title: "",
+  message: "",
   buttons: [],
-  showAlert: (title, message, buttons = [{ text: 'OK' }]) => 
+  showAlert: (title, message, buttons = [{ text: "OK" }]) =>
     set({ visible: true, title, message, buttons }),
   hideAlert: () => set({ visible: false }),
 }));

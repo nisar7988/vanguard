@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
-import { agentApi, Permission } from '@/src/api/agent-api';
+import { useState, useEffect, useCallback } from "react";
+import { agentApi, Permission } from "@/src/api/agent-api";
 
 export function usePermissions() {
   const [permissions, setPermissions] = useState<Permission[]>([]);
@@ -11,8 +11,7 @@ export function usePermissions() {
       const response = await agentApi.getPermissions();
       setPermissions(response.data);
     } catch (error: any) {
-
-      console.error('Failed to fetch permissions:', error.message || error);
+      console.error("Failed to fetch permissions:", error.message || error);
     } finally {
       setLoading(false);
       setRefreshing(false);

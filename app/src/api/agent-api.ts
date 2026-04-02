@@ -32,20 +32,28 @@ export interface Log {
 
 export const agentApi = {
   getRequests: async () => {
-    const response = await apiClient.get<API_Response<AgentRequest[]>>("/v1/agent/requests");
+    const response =
+      await apiClient.get<API_Response<AgentRequest[]>>("/v1/agent/requests");
     return response.data;
   },
 
-  approveRequest: async (requestId: string, decision: "allow_once" | "allow_always" | "deny") => {
-    const response = await apiClient.post<API_Response<any>>("/v1/agent/approve", {
-      requestId,
-      decision,
-    });
+  approveRequest: async (
+    requestId: string,
+    decision: "allow_once" | "allow_always" | "deny",
+  ) => {
+    const response = await apiClient.post<API_Response<any>>(
+      "/v1/agent/approve",
+      {
+        requestId,
+        decision,
+      },
+    );
     return response.data;
   },
 
   getPermissions: async () => {
-    const response = await apiClient.get<API_Response<Permission[]>>("/v1/permissions");
+    const response =
+      await apiClient.get<API_Response<Permission[]>>("/v1/permissions");
     return response.data;
   },
 
@@ -59,9 +67,10 @@ export const agentApi = {
     target: string;
     content: string;
   }) => {
-    const response = await apiClient.post<API_Response<any>>("/v1/agent/request-action", data);
+    const response = await apiClient.post<API_Response<any>>(
+      "/v1/agent/request-action",
+      data,
+    );
     return response.data;
   },
 };
-
-
