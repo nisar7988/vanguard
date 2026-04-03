@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       colors: {
         vanguard: {
-          background: "#000000",
+          background: "#121428ff",
           card: "#1E293B",
           primary: "#F97316",
           "text-primary": "#F8FAFC",

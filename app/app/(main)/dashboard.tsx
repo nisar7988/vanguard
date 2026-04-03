@@ -17,9 +17,9 @@ export default function DashboardScreen() {
   const pendingCount = requests.length;
 
   return (
-    <SafeAreaView className="flex-1 bg-vanguard-background">
+    <View className="flex-1  ">
       <ScrollView
-        className="flex-1 bg-vanguard-background"
+        className="flex-1 bg-vanguard-background pt-3"
         contentContainerStyle={{ padding: 24, paddingBottom: 120 }}
       >
         <View className="flex-row justify-between items-center mb-8">
@@ -60,7 +60,7 @@ export default function DashboardScreen() {
               style={{ opacity: isConnected ? 1 : 0.5 }}
               className="flex-1 bg-vanguard-background p-4 rounded-2xl mr-2 items-center border border-vanguard-border/50"
             >
-              <View className="w-10 h-10 bg-emerald-500/10 rounded-full items-center justify-center mb-2">
+              <View className="w-10 h-10 bg-emerald-500/10 rounded-full  items-center justify-center mb-2">
                 <Ionicons name="eye-outline" size={20} color="#10B981" />
               </View>
               <Text className="text-vanguard-text-primary font-bold text-xs">
@@ -83,7 +83,7 @@ export default function DashboardScreen() {
               <Text className="text-vanguard-text-primary font-bold text-xs">
                 Send Email
               </Text>
-              <Text className="text-amber-500 text-[10px] font-bold uppercase mt-1">
+              <Text className="text-amber-500 text-[9px] font-bold uppercase mt-1">
                 Medium Risk
               </Text>
             </TouchableOpacity>
@@ -207,6 +207,6 @@ export default function DashboardScreen() {
           <Ionicons name="chevron-forward" size={20} color="#94A3B8" />
         </TouchableOpacity>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
