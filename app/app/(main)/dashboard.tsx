@@ -1,3 +1,4 @@
+import { GradientButton } from "@/src/components/gradient-button";
 import { ThemedGradient } from "@/src/components/themed-gradient";
 import { COLORS } from "@/src/constants/theme";
 import { useAuth0Login } from "@/src/hooks/use-auth0-login";
@@ -95,31 +96,30 @@ export default function DashboardScreen() {
               className="flex-1 bg-vanguard-background p-4 rounded-2xl ml-2 items-center border border-vanguard-border/50"
             >
               <View className="w-10 h-10 bg-rose-500/10 rounded-full items-center justify-center mb-2">
-                <Ionicons name="card-outline" size={20} color="#EF4444" />
+                <Ionicons name="card-outline" size={20} color="#fa0000ff" />
               </View>
               <Text className="text-vanguard-text-primary font-bold text-xs">
                 Payment
               </Text>
-              <Text className="text-rose-500 text-[10px] font-bold uppercase mt-1">
+              <Text className="text-red-500 text-[10px] font-bold uppercase mt-1">
                 High Risk
               </Text>
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity
+          <GradientButton
+            title={isConnected ? "Gmail Authorized" : "Authorize Gmail Account"}
             onPress={handleConnectGmail}
-            className="bg-vanguard-primary/10 py-3 rounded-2xl flex-row items-center justify-center border border-vanguard-primary/20"
-          >
-            <Ionicons
-              name={isConnected ? "checkmark-circle" : "link"}
-              size={18}
-              color={COLORS.primary}
-              className="mr-2"
-            />
-            <Text className="text-vanguard-primary font-bold ml-2">
-              {isConnected ? "Gmail Authorized" : "Authorize Gmail Account"}
-            </Text>
-          </TouchableOpacity>
+            disabled={isConnected}
+            icon={
+              <Ionicons
+                name={isConnected ? "checkmark-circle" : "link"}
+                size={18}
+                color={COLORS.white}
+                className="mr-2"
+              />
+            }
+          />
         </View>
 
         {/* Management Sections */}
