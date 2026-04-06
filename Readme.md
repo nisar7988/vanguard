@@ -1,30 +1,70 @@
-# <img src="app/assets/images/logo.png" width="40" height="40" align="center" style="margin-right: 10px;"> Vanguard
+# <img src="screenshot/logo.png" width="40" height="40" align="center" style="margin-right: 10px;"> Vanguard
 
-### Secure AI Action Proxy with Permission Intelligence
+### The Permission Layer for Sovereign AI Agents
+
+**Secure Intermediary Proxy | Permission Intelligence | Auth0 Token Vault Integration**
 
 ---
 
 ## 🧠 The Problem
 
-As AI agents become more autonomous, they increasingly need to act on behalf of users—sending emails, managing calendars, or accessing sensitive data. However, letting an AI directly touch real-world APIs is a security nightmare. There is no fine-grained control, no audit trail, and no user-in-the-loop mechanism for high-stakes actions.
+AI agents increasingly act on behalf of users—sending emails, accessing data, and triggering real-world actions. However, letting an AI directly touch real-world APIs is a security nightmare. There is no runtime control, no audit trail, and no user approval for high-risk actions.
 
 ## 🛡️ The Vanguard Solution
 
-**Vanguard** is a secure intermediary layer designed for the AI era. It intercepts every action an AI agent attempts, evaluates it against a robust permission engine, and securely executes it using Auth0-powered token vaulting.
+**Vanguard** is a secure intermediary layer designed for the AI era. It intercepts every action an AI agent attempts, evaluates it against a robust permission engine, and securely executes it using **Auth0** for identity and a **Vault-based token access model**.
 
-- **Stop Uncontrolled AI Actions**: Every API call is gated.
+👉 **Vanguard transforms AI systems from execution-first → control-first.**
+
+- **Stop Uncontrolled AI Actions**: Every API call is gated by default.
 - **User-Authored Decisions**: Users decide if an action is "Allowed Once", "Always Allowed", or "Denied".
 - **Zero-Trust Execution**: The AI never sees your Gmail/Slack tokens. Vanguard handles the execution securely.
 
 ---
 
 ## Screenshots
-<div align="center"> <img src="screenshot/login.png" width="250" alt="Login Screen"/> <img src="screenshot/login-web.png" width="250" alt="Web Login"/> <img src="screenshot/dashboard.png" width="250" alt="Dashboard"/>
+
+<div align="center"> 
+<img src="screenshot/login.png" width="250" alt="Login Screen"/> 
+<img src="screenshot/login-web.png" width="250" alt="Web Login"/> 
+<img src="screenshot/dashboard-1.png" width="250" alt="Dashboard"/>
+<img src="screenshot/dashboard.png" width="250" alt="Dashboard"/>
 
 <br/><br/>
 
-<img src="screenshot/pending-permission.png" width="250" alt="Pending Permissions"/> <img src="screenshot/permissions.png" width="250" alt="Permissions"/> <img src="screenshot/request-success.png" width="250" alt="Request Success"/> </div>
+<img src="screenshot/pending-permissions.png" width="250" alt="Pending Permissions"/> 
+<img src="screenshot/permissions.png" width="250" alt="Permissions"/> 
+<img src="screenshot/low-risk.png" width="250" alt="Request Success"/> 
+<img src="screenshot/logs.png" width="250" alt="Request Success"/> 
+</div>
 
+---
+
+## 🧪 Demo Flow
+
+1. **User triggers** an AI action.
+2. **Request** is sent to Vanguard backend.
+3. **Permission engine** evaluates risk and matching rules.
+4. **High-risk actions** require user approval (simulated via app notification).
+5. **Token retrieved** securely from backend (Vault layer backed by Auth0 identity).
+6. **Action executed** by Vanguard on behalf of the user.
+7. **Logs updated** for full audit transparency.
+
+---
+
+## 🔐 Security Principle
+
+Vanguard applies the **Principle of Least Privilege** to AI systems.
+
+Instead of giving AI unrestricted access, every action is:
+
+- **Explicitly authorized** by the user.
+- **Scoped** to the specific task.
+- **Executed** through a secure, isolated layer.
+
+👉 This shifts AI systems from **implicit trust → explicit control**.
+
+---
 
 ## 🔥 Key Features
 
@@ -33,7 +73,8 @@ As AI agents become more autonomous, they increasingly need to act on behalf of 
 Vanguard uses **Auth0** for seamless, enterprise-grade authentication.
 
 - **PKCE Flow**: Secure mobile authentication via native SDK.
-- **Token Vault**: Securely stores and retrieves service-specific tokens (Gmail, Slack, etc.) without exposing credentials to the AI.
+- **Token Vault**: Securely stores and retrieves service-specific tokens (Gmail, Slack, etc.).
+- **👉 Tokens are never exposed to the AI agent or frontend**—only Vanguard can access them after authorization.
 
 ### 🛑 2. Permission Intelligence System
 
@@ -54,22 +95,33 @@ Full traceability. Every decision (approved or denied) is logged with:
 
 ---
 
-## 🧱 Technical Architecture
+## 🏗️ Technical Architecture
 
 ```mermaid
 graph TD
-    A[AI Agent] -->|Request Action| B[Vanguard Gateway]
+    A[Sovereign AI / OpenClaw] -->|1. Action Request| B[Vanguard Gateway]
     B --> C{Permission Engine}
-    C -->|Rules Match| D[Allowed]
     C -->|No Match| E[Pending User Approval]
-    E -->|Push Notification| F[Vanguard App]
-    F -->|User Decides| D
-    D -->|Retrieve Scoped Token| G[Auth0 Token Vault]
-    G -->|Signed Request| H[External API: Gmail/Slack/etc.]
-    H -->|Result| B
-    B -->|Response| A
-    B -->|Write Log| I[(Audit Logs)]
+    E -->|2. Push Notification| F[Vanguard Mobile App]
+    F -->|3. User Tap: Approve| D
+    C -->|Rule: Always Allow| D[Authorized]
+
+    D -->|4. Request Scoped Token| G[Auth0 Token Vault]
+    G -->|5. Short-lived Access Token| B
+    B -->|6. Signed API Call| H[External API: Gmail/Slack]
+    H -->|7. Result| B
+    B -->|8. Success Response| A
+    B -->|9. Write Log| I[(Audit Logs)]
 ```
+
+---
+
+## 🛠️ Tech Stack
+
+- **Mobile:** [Expo](https://expo.dev/) (React Native) with [NativeWind](https://nativewind.dev/) (Tailwind CSS) for a modern, responsive UI.
+- **Backend:** [NestJS](https://nestjs.com/) (TypeScript) providing a robust, scalable REST API.
+- **Identity:** [Auth0 for AI Agents](https://auth0.com/) (Token Vault, M2M Authentication, Native SDK).
+- **AI Logic:** OpenAI GPT-4o-mini (used exclusively for intent parsing into JSON).
 
 ---
 
@@ -77,48 +129,51 @@ graph TD
 
 ### Prerequisites
 
-- **Node.js** (v18+)
-- **Expo Go** (for mobile development)
-- **Auth0 Account** (configured for Native and Server applications)
+- Node.js (v18+)
+- Expo Go on your mobile device
+- An Auth0 Tenant with Token Vault enabled
 
-### 1. Server Setup (NestJS)
+### 1. Backend Setup
 
 ```bash
-# Navigate to server
 cd server
-
-# Install dependencies
 npm install
-
-# Configure your .env (Auth0 Domain, Client ID, Secret)
+# Configure .env with AUTH0_DOMAIN, CLIENT_ID, and VAULT_API_URL
 npm run start:dev
 ```
 
-### 2. App Setup (Expo/React Native)
+### 2. Mobile App Setup
 
 ```bash
-# Navigate to app
 cd app
-
-# Install dependencies
 npm install
-
-# Ensure you have your Auth0 config in .env
 npx expo start
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## 🗺️ Roadmap
 
-- **Mobile**: [Expo](https://expo.dev/), [React Native](https://reactnative.dev/), [NativeWind](https://nativewind.dev/), [Zustand](https://docs.pmnd.rs/zustand/), [Auth0 Native SDK](https://github.com/auth0/react-native-auth0).
-- **Backend**: [NestJS](https://nestjs.com/), TypeScript, [Axios](https://axios-http.com/).
-- **Security**: [Auth0](https://auth0.com/) (Identity, Token Vaulting, JWT).
+- [ ] **Biometric Gates:** Require FaceID/TouchID for every Token Vault retrieval.
+- [ ] **Dynamic Scoping:** Automatically narrow token scopes based on the specific AI prompt.
+- [ ] **Multi-Agent Support:** Unique permission profiles for different AI models (e.g., GPT-4 vs. local Llama).
 
 ---
 
-## 🗺️ Roadmap
+## 🔮 Future Work
 
-- [ ] **AI-Powered Risk Scoring**: Real-time evaluation of action complexity.
-- [ ] **Expanded Integrations**: One-click connect for Zapier and IFTTT.
-- [ ] \*\*Fleet
+- [ ] **Biometric Gates**: Require FaceID/TouchID for every Token Vault retrieval.
+- [ ] **Dynamic Scoping**: Automatically narrow token scopes based on specific AI intent.
+- [ ] **Multi-Agent Support**: Unique permission profiles for different models (e.g., GPT-4 vs. local Llama).
+
+---
+
+## ⚡ Why This Matters
+
+AI systems today prioritize execution over safety. Vanguard introduces the missing layer of:
+
+- **Control**: Real-time gating of sensitive actions.
+- **Security**: Zero-exposure token management.
+- **Accountability**: Immutable audit logs of every AI decision.
+
+👉 **Enabling safe, controllable AI in real-world, high-stakes environments.**
