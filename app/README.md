@@ -1,112 +1,97 @@
-🏆 Vanguard Lite – App Description
-🧠 Overview
+# 📱 Vanguard Mobile App
 
-Vanguard Lite is a secure AI action gateway that allows AI agents to perform actions on behalf of users — but only with proper authorization, permission control, and secure token handling via Auth0.
+The mobile command center for the Vanguard permission layer. This app allows users to manage AI agent permissions, approve high-risk actions in real-time, and maintain a clear audit trail of all AI activities.
 
-The system ensures that AI never directly accesses user accounts or credentials, and all actions are routed through a controlled backend layer.
+---
 
-🎯 Problem
+## 🛠️ Tech Stack
 
-AI agents are becoming capable of performing real-world actions like sending emails, updating systems, or managing workflows.
+- **Framework:** [Expo](https://expo.dev/) (React Native)
+- **Navigation:** [Expo Router](https://docs.expo.dev/router/introduction/) (File-based routing)
+- **Styling:** [NativeWind](https://nativewind.dev/) (Tailwind CSS for React Native)
+- **State Management:** [Zustand](https://github.com/pmndrs/zustand)
+- **Authentication:** [Auth0 React Native SDK](https://github.com/auth0/react-native-auth0) (with PKCE)
+- **Icons:** [Lucide React Native](https://lucide.dev/) & [Ionicons](https://ionic.io/ionicons)
+- **UI Components:** Reusable, accessible components built with NativeWind.
 
-However, current systems lack:
+---
 
-❌ User control
-❌ Transparency
-❌ Secure delegation
+## 📂 Folder Structure
 
-This creates risks where AI can act without proper authorization.
+```text
+app/
+├── app/                  # Expo Router directory (screens & layouts)
+│   ├── (auth)/           # Authentication flow (Login, Signup)
+│   ├── (main)/           # Main application flow (Dashboard, Logs, Settings)
+│   ├── approval/         # Real-time request approval screens
+│   └── _layout.tsx       # Root layout and provider configuration
+├── assets/               # Static assets (images, fonts, splash screen)
+├── src/                  # Core application logic
+│   ├── api/              # Axios instance and API service hooks
+│   ├── components/       # Reusable UI components (Buttons, Cards, Inputs)
+│   ├── constants/        # Application constants and config
+│   ├── hooks/            # Custom React hooks (e.g., useAuth, useDashboard)
+│   ├── store/            # Zustand store definitions for global state
+│   ├── theme/            # Styling tokens and Tailwind configuration
+│   └── types/            # TypeScript type definitions
+├── tailwind.config.js    # NativeWind/Tailwind configuration
+└── app.json              # Expo configuration
+```
 
-💡 Solution
+---
 
-Vanguard Lite introduces a permission-first execution model:
+## ✨ Core Features
 
-AI must request actions → system verifies → user controls → action executes securely
+- **Real-time Approvals:** Instant push-notification-like interface for approving or denying AI requests.
+- **Granular Permissions:** Decide whether an action is allowed "Once", "Always", or "Denied".
+- **Audit Logs:** A detailed, human-readable history of every decision and its outcome.
+- **Service Management:** Securely connect and manage external integrations (Gmail, Slack, etc.).
+- **Biometric Ready:** Foundation for FaceID/TouchID gated token retrieval.
 
-⚙️ How the App Works
+---
 
-1. User Authentication
-   User logs in via Auth0
-   Backend validates identity using JWT
-2. Service Connection
-   User connects external services (e.g., Gmail)
-   Tokens are securely stored in Auth0 Token Vault
-3. AI Request
+## 🚀 Getting Started
 
-AI (simulated) sends a request:
+### Prerequisites
 
-{
-"action": "send_email",
-"to": "team@mail.com",
-"message": "Meeting at 5"
-} 4. Permission Check
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- [Expo Go](https://expo.dev/go) app on your physical device (iOS/Android)
+- OR an Android Emulator / iOS Simulator
 
-System checks if user has already allowed this action:
+### Installation
 
-If allowed → execute directly
-If not → ask user for approval 5. User Approval
+1. **Navigate to the app directory:**
+   ```bash
+   cd app
+   ```
 
-User can choose:
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-✅ Allow Once
-🔁 Always Allow
-❌ Deny 6. Secure Execution
-Backend retrieves token from Auth0 Token Vault
-Executes action (mock or API)
-No credentials exposed 7. Logging
+3. **Configure Environment:**
+   Create a `.env` file (if not already present) and add your Auth0 and API configuration:
+   ```env
+   EXPO_PUBLIC_AUTH0_DOMAIN=your-tenant.auth0.com
+   EXPO_PUBLIC_AUTH0_CLIENT_ID=your-client-id
+   EXPO_PUBLIC_API_URL=http://your-local-ip:3000/api/v1
+   ```
 
-Every action is recorded:
+4. **Start the development server:**
+   ```bash
+   npx expo start
+   ```
 
-Action type
-Decision
-Timestamp
-Result
-🧩 Core Features
-🔐 Auth0-based authentication
-🛑 Permission control system
-🤖 AI request handling
-🔐 Token Vault integration (mocked for demo)
-⚙️ Secure action execution
-🧾 Audit logging system
-🧠 Key Concept
+5. **Open the app:**
+   - Scan the QR code with **Expo Go** (Android) or the **Camera app** (iOS).
+   - Press `i` for iOS Simulator or `a` for Android Emulator.
 
-“AI should not act freely — it should act with permission.”
+---
 
-🔄 App Flow
-Login
-↓
-Dashboard
-↓
-Connect Service
-↓
-AI Request
-↓
-Permission Check
-↓
-User Approval (if needed)
-↓
-Token Retrieval (Auth0)
-↓
-Action Execution
-↓
-Logs
-🏁 Goal
+## 🔐 Security
 
-To demonstrate how AI agents can safely interact with real-world systems using:
-
-Secure identity
-Delegated authorization
-User-controlled permissions
-💥 Summary
-
-Vanguard Lite is not just an AI app —
-it is a secure control layer for AI-driven actions.
-
-If you want next:
-I can convert this into:
-
-📄 README.md format
-🎤 30-sec pitch
-🎬 demo explanation
-
-Just say 👍
+Vanguard Mobile prioritizes security:
+- **Zero-Credential Policy:** The mobile app never touches or stores raw service tokens (Gmail/Slack).
+- **Secure Storage:** sensitive session data is stored using `expo-secure-store`.
+- **JWT Authentication:** All API communication is secured via Auth0-issued JSON Web Tokens.
