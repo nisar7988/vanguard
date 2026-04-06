@@ -32,7 +32,7 @@ AI agents increasingly act on behalf of users—sending emails, accessing data, 
 <br/><br/>
 
 <img src="screenshots/dashboard.png" width="250" alt="Dashboard"/>
-<img src="screenshots/low-risk.png" width="250" alt="Request Success"/> 
+<img src="screenshots/low-risk.png" width="250" alt="Request Success"/>
 
 <br/><br/>
 
@@ -180,3 +180,9 @@ AI systems today prioritize execution over safety. Vanguard introduces the missi
 - **Accountability**: Immutable audit logs of every AI decision.
 
 👉 **Enabling safe, controllable AI in real-world, high-stakes environments.**
+
+## Note on Contributions
+
+This project was built independently by me (Nisar Ahmed).
+
+The repository shows multiple contributors due to commits made from different Git configurations/accounts, but all contributions are from the same individual and are not affiliated with any employer.
