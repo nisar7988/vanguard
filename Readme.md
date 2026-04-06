@@ -1,4 +1,4 @@
-# <img src="screenshot/logo.png" width="40" height="40" align="center" style="margin-right: 10px;"> Vanguard
+# <img src="screenshots/logo.png" width="40" height="40" align="center" style="margin-right: 10px;"> Vanguard
 
 ### The Permission Layer for Sovereign AI Agents
 
@@ -22,20 +22,20 @@ AI agents increasingly act on behalf of users—sending emails, accessing data, 
 
 ---
 
-## Screenshots
+## screenshotss
 
 <div align="center"> 
-<img src="screenshot/login.png" width="250" alt="Login Screen"/> 
-<img src="screenshot/login-web.png" width="250" alt="Web Login"/> 
-<img src="screenshot/dashboard-1.png" width="250" alt="Dashboard"/>
-<img src="screenshot/dashboard.png" width="250" alt="Dashboard"/>
+<img src="screenshots/login.png" width="250" alt="Login Screen"/> 
+<img src="screenshots/login-web.png" width="250" alt="Web Login"/> 
+<img src="screenshots/dashboard-1.png" width="250" alt="Dashboard"/>
+<img src="screenshots/dashboard.png" width="250" alt="Dashboard"/>
 
 <br/><br/>
 
-<img src="screenshot/pending-permissions.png" width="250" alt="Pending Permissions"/> 
-<img src="screenshot/permissions.png" width="250" alt="Permissions"/> 
-<img src="screenshot/low-risk.png" width="250" alt="Request Success"/> 
-<img src="screenshot/logs.png" width="250" alt="Request Success"/> 
+<img src="screenshots/pending-permissions.png" width="250" alt="Pending Permissions"/> 
+<img src="screenshots/permissions.png" width="250" alt="Permissions"/> 
+<img src="screenshots/low-risk.png" width="250" alt="Request Success"/> 
+<img src="screenshots/logs.png" width="250" alt="Request Success"/> 
 </div>
 
 ---
