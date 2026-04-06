@@ -28,13 +28,14 @@ AI agents increasingly act on behalf of users—sending emails, accessing data, 
 <img src="screenshots/login.png" width="250" alt="Login Screen"/> 
 <img src="screenshots/login-web.png" width="250" alt="Web Login"/> 
 <img src="screenshots/dashboard-1.png" width="250" alt="Dashboard"/>
-<img src="screenshots/dashboard.png" width="250" alt="Dashboard"/>
+<br/><br/>
 
+<img src="screenshots/dashboard.png" width="250" alt="Dashboard"/>
+<img src="screenshots/low-risk.png" width="250" alt="Request Success"/> 
 <br/><br/>
 
 <img src="screenshots/pending-permissions.png" width="250" alt="Pending Permissions"/> 
 <img src="screenshots/permissions.png" width="250" alt="Permissions"/> 
-<img src="screenshots/low-risk.png" width="250" alt="Request Success"/> 
 <img src="screenshots/logs.png" width="250" alt="Request Success"/> 
 </div>
 
